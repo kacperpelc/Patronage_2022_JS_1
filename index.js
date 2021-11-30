@@ -1,7 +1,5 @@
-
-var pizzaList = document.getElementById("pizzaList");
 var pizzaData = "";
-let urlJson = "https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.json"
+const urlJson = "https://raw.githubusercontent.com/alexsimkovich/patronage/main/api/data.json"
 
 async function getJson(url)
 {
@@ -26,23 +24,19 @@ function setupData()
     {
         pizza.count = 0;
     
-        let pizzaItem = document.createElement("div");
-        let pizzaTitle = document.createElement("h1");
-        let pizzaOrderButton = document.createElement("div");
-        let pizzaText = document.createElement("div");
-        let pizzaImage = document.createElement("img");
+        const pizzaItem = document.createElement("div");
+        const pizzaTitle = document.createElement("h1");
+        const pizzaOrderButton = document.createElement("div");
+        const pizzaText = document.createElement("div");
+        const pizzaImage = document.createElement("img");
     
-        
+        pizzaTitle.innerHTML = pizza.id + ". " + pizza.title;
     
-        pizzaTitle.appendChild(document.createTextNode(
-            pizza.id + ". " + pizza.title));
-    
-        pizzaOrderButton.appendChild(document.createTextNode(
-            "ZAMÓW"));
-    
-        pizzaText.appendChild(document.createTextNode(
+        pizzaText.innerHTML = 
             "Składniki: " + pizza.ingredients + 
-            "; Cena: " + pizza.price));
+            "; Cena: " + pizza.price;
+
+        pizzaOrderButton.innerHTML = "ZAMÓW";
     
         pizzaImage.src = pizza.image;
     
@@ -74,15 +68,14 @@ let basketSum = 0;
 
 function orderPizza(pizza)
 {
-    let basketItem = document.createElement("div");
-    let basketItemTitle = document.createElement("div");
-    let basketItemCount = document.createElement("div");
-    let basketItemPrice = document.createElement("div");
-    let pizzaRemoveButton = document.createElement("div");
-    let pizzaTemp = pizza;
+    const basketItem = document.createElement("div");
+    const basketItemTitle = document.createElement("div");
+    const basketItemCount = document.createElement("div");
+    const basketItemPrice = document.createElement("div");
+    const pizzaRemoveButton = document.createElement("div");
+    const pizzaTemp = pizza;
 
-    pizzaRemoveButton.appendChild(document.createTextNode(
-        "USUŃ"));    
+    pizzaRemoveButton.innerHTML = "USUŃ";    
     
     if (!basketSumCheck())
     {
@@ -96,15 +89,15 @@ function orderPizza(pizza)
         basketItem.setAttribute("id", "pizza" + pizza.id);
         basketItem.setAttribute("class", "basketItem");
 
-        basketItemTitle.appendChild(document.createTextNode(pizza.title));
+        basketItemTitle.innerHTML = pizza.title;
         basketItem.appendChild(basketItemTitle);
 
-        basketItemCount.appendChild(document.createTextNode("Ilość: " + pizza.count));
+        basketItemCount.innerHTML = "Ilość: " + pizza.count;
         basketItem.appendChild(basketItemCount);
         
         basketItemCount.setAttribute("id", "basket" + pizza.id);
 
-        basketItemPrice.appendChild(document.createTextNode("Cena: " + pizza.price * pizza.count + " zł"));
+        basketItemPrice.innerHTML = "Cena: " + pizza.price * pizza.count + " zł";
         basketItem.appendChild(basketItemPrice);
 
         basketItem.appendChild(pizzaRemoveButton);
@@ -124,7 +117,7 @@ function orderPizza(pizza)
 
         if (document.getElementById("basketSummary").innerHTML === "")
         {
-            basketSummary.appendChild(document.createTextNode("Suma: " + Math.round(basketSum*100) / 100 + " zł"));
+            basketSummary.innerHTML = "Suma: " + Math.round(basketSum*100) / 100 + " zł";
         }
 
         else
